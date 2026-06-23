@@ -1,0 +1,52 @@
+# ----------------------------------------------------------------------------
+# Torch stack — installed from the PyTorch cu124 index. Do NOT upgrade with
+# `pip install -U torch ...`; that will replace the +cu124 build with a default
+# CUDA wheel and silently break the env.
+#
+# To reinstall on a fresh node:
+#   pip install torch==2.4.1+cu124 torchvision==0.19.1+cu124 \
+#               --index-url https://download.pytorch.org/whl/cu124
+# ----------------------------------------------------------------------------
+torch==2.4.1+cu124
+torchvision==0.19.1+cu124
+
+# ----------------------------------------------------------------------------
+# flash-attn — pinned as a PREBUILT wheel (direct URL), not the PyPI sdist.
+# The sdist's setup.py imports torch, which fails under pip build isolation
+# (and compiling needs nvcc + lots of RAM). The wheel below matches the pinned
+# torch/python/ABI: cp311 + torch2.4 + cu12 + cxx11abiFALSE.
+#
+# To actually engage it through diffusers at runtime, export
+# DIFFUSERS_ATTN_BACKEND="flash". On Blackwell (SM 12.0) the kernels won't load
+# — set DIFFUSERS_ATTN_BACKEND="native" (flash-attn is then unused, install is
+# still fine). For a different Python/torch/ABI, pick the matching wheel from
+# https://github.com/Dao-AILab/flash-attention/releases/tag/v2.8.3
+# ----------------------------------------------------------------------------
+flash-attn @ https://github.com/Dao-AILab/flash-attention/releases/download/v2.8.3/flash_attn-2.8.3+cu12torch2.4cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
+
+# Core model stack
+diffusers==0.36.0
+transformers==4.57.6
+accelerate==1.12.0
+safetensors==0.7.0
+huggingface_hub==0.36.0
+ftfy>=6.1
+# Direct dep of pipeline/wan_t2v_controlnet_pipeline.py (pinned explicitly
+# even though transformers pulls it transitively, to keep the build stable).
+regex>=2024.0.0
+
+# Training-only
+bitsandbytes==0.49.1
+ema-pytorch==0.7.7
+wandb==0.25.1
+
+# Precompute (silhouette extraction)
+mediapipe>=0.10
+
+# Numerics, I/O, progress
+numpy==1.26.4
+opencv-python==4.11.0.86
+Pillow==12.0.0
+imageio>=2.31
+imageio-ffmpeg==0.6.0
+tqdm==4.67.1
