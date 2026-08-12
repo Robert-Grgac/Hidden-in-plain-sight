@@ -1,6 +1,6 @@
 # Hidden in Plain Sight: Generation of Face-Based Optical Illusions in Text-to-Video Flow-Matching Models
 
-Thesis code for **Hidden in Plain Sight: Generation of Face-Based Optical Illusions in Text-to-Video Flow-Matching Models**. [Paper link](<URL_TO_PUBLISHED_THESIS>)
+Thesis code for **Hidden in Plain Sight: Generation of Face-Based Optical Illusions in Text-to-Video Flow-Matching Models**. [Paper link](https://purl.utwente.nl/essays/111319)
 
 *By Robert Grgac · University of Twente · MSc Computer Science · 2026*
 
